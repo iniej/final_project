@@ -1,0 +1,17 @@
+{% extends 'movie_wishlist/base.html' %}
+{% block content %}
+
+
+{% if message %}
+  <P>{{ message }}</p>
+{% endif %}
+
+<form method='post' action="">{% csrf_token %}
+  <table id="registration_form">
+    {{ form.as_table}}
+  </table>
+  <button type='submit'>Register</button>
+</form>
+
+
+{% endblock%}
