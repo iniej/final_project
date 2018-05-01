@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm, WatchedListForm, WatchListForm, PopularMoviesForm
 from django.contrib.auth import authenticate, login, logout
-# import requests
+import requests
 
 # Create your views here.
 
@@ -37,7 +37,7 @@ def watch_list(request):
     return render(request, 'movie_wishlist/watchlist.html', {'form' : form})
 
 def movie_list(request):
-    apikey = 'd14fee3e'
+    apikey = '6d42cd22'
     movie= {}
     # if 'search_movie' in request.GET:
     #     title = request.GET.get('search_movie')
