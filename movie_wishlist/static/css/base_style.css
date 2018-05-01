@@ -1,0 +1,9 @@
+ody {
+  font-family: monospace;
+}
+
+#welcome_msg, #login {
+  position: absolute;
+  right: 0px;
+  padding-right: 10px;
+}

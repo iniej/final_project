@@ -1,0 +1,17 @@
+{% extends 'movie_wishlist/base.html' %}
+
+{% block content %}
+
+<h3>Your movie watched list page</h3>
+
+<div>
+  <p>Movie search</p>
+  <form action = "{% url 'watched_list' %}">
+    {{ form }}
+    <input type = 'submit' value = 'Search' />
+  </form>
+</div>
+
+<p>Go back to user main page? <a href = "{% url 'user' %}">click here</a></p>
+
+{% endblock %}
