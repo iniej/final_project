@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from .forms import RegistrationForm, WatchedListForm, WatchListForm, PopularMoviesForm
 from django.contrib.auth import authenticate, login, logout
 import requests
-
+from movie_wishlist import movie_data
+from .models import WatchList
 # Create your views here.
 
 
@@ -33,12 +34,13 @@ def user(request):
 
 def watch_list(request):
     form = WatchListForm()
+    wishlist = WatchList.objects.all()
     search_movie = request.GET.get('search_movie')
-    return render(request, 'movie_wishlist/watchlist.html', {'form' : form})
+    return render(request, 'movie_wishlist/watchlist.html', {'form' : form, 'wishlist': wishlist})
 
 def movie_list(request):
-    apikey = '6d42cd22'
-    movie= {}
+    # apikey = '6d42cd22'
+    # movie= {}
     # if 'search_movie' in request.GET:
     #     title = request.GET.get('search_movie')
     #     print(title)
@@ -49,10 +51,7 @@ def movie_list(request):
 
 
     title = request.GET.get('search_movie')
-    print(title)
-    url = 'http://www.omdbapi.com/?apikey='+apikey+'&'+'t='+title
-    response = requests.get(url)
-    movie = response.json()
+    movie = movie_data.movie_api(title)
 
     return render(request, 'movie_wishlist/movie.html',{'movie': movie})
 
@@ -78,3 +77,15 @@ def register(request):
     else:
         form = RegistrationForm()
         return render(request, 'registration/register.html', { 'form' : form } )
+
+def add_to_watchlist(request):
+    name = request.POST.get("Title")
+    year = request.POST.get('Year')
+    actor = request.POST.get('Actors')
+    director = request.POST.get('Director')
+
+    new_movie = WatchList(title = name, actor = actor, director = director, year = year)
+
+
+    new_movie.save()
+    return render(request, 'movie_wishlist/user.html')

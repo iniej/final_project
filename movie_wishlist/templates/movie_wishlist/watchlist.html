@@ -10,7 +10,13 @@
     <input type = 'submit' value = 'Search' />
   </form>
 </div>
-
+{% for list in wishlist %}
+    <p><strong>Movie name:</strong> {{list.title}}</p>
+    <p><strong>Year released:</strong> {{list.year}}</p>
+    <p><strong>Movie director:</strong> {{list.director}}</p>
+    <p><strong>Actors:</strong> {{list.actor}}</p>
+    <br>
+  {% endfor %}
 <p>Go back to user main page? <a href = "{% url 'user' %}">click here</a></p>
 
 {% endblock %}
