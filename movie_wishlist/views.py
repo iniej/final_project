@@ -32,10 +32,10 @@ def watch_list(request):
 
 def movie_list(request):
 
+    title = request.GET.get('search_movie')
+    movie = movie_data.movie_api(title)
     # title = request.GET.get('search_movie')
     # movie = movie_data.movie_api(title)
-    title = request.GET.get('search_movie')
-    movie = movie_data.get_movie_info(title)
 
     return render(request, 'movie_wishlist/movie.html',{'movie': movie})
 

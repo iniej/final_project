@@ -1,5 +1,5 @@
 from django import forms
-<<<<<<< HEAD
+
 from .models import UserInfo
 
 from django.contrib.auth.forms import UserCreationForm
@@ -11,14 +11,6 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
-=======
-from . models import Movie, user_info
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-
-from django.forms import ValidationError
-
-
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -28,7 +20,6 @@ class UserRegistrationForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
 
->>>>>>> 3e978d94bd540b321e23aae828bae26654f88ae8
     def clean_username(self):
 
         username = self.cleaned_data['username']
@@ -70,11 +61,9 @@ class UserRegistrationForm(UserCreationForm):
 
 
     def save(self, commit=True):
-<<<<<<< HEAD
+
         user = super(RegistrationForm, self).save(commit=False)
-=======
-        user = super(UserRegistrationForm, self).save(commit=False)
->>>>>>> 3e978d94bd540b321e23aae828bae26654f88ae8
+
         user.username = self.cleaned_data['username']
         user.email = self.cleaned_data['email']
         user.first_name = self.cleaned_data['first_name']
@@ -84,7 +73,6 @@ class UserRegistrationForm(UserCreationForm):
             user.save()
 
         return user
-<<<<<<< HEAD
 
 class WatchListForm(forms.Form):
     search_movie = forms.CharField(label = 'Search for a movie', max_length = 200)
@@ -94,5 +82,3 @@ class WatchedListForm(forms.Form):
 
 class PopularMoviesForm(forms.Form):
     search_movie = forms.CharField(label = 'Search popular movie',max_length = 200)
-=======
->>>>>>> 3e978d94bd540b321e23aae828bae26654f88ae8

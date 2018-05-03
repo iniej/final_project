@@ -1,19 +1,8 @@
 {% extends 'movie_wishlist/base.html' %}
-<<<<<<< HEAD
 
 {% block content %}
 
 <h2> Log in</h2>
-=======
-{% block content %}
-
-
-{% if message %}
-  <P>{{ message }}</p>
-{% endif %}
-
-<h2>Log in</h2>
->>>>>>> 3e978d94bd540b321e23aae828bae26654f88ae8
 
   <form method='POST' action="">{% csrf_token %}
   <table id='login_form'>
@@ -22,9 +11,4 @@
     <button type="submit">Login</button>
   </form>
 
-<<<<<<< HEAD
 {% endblock %}
-=======
-
-{% endblock%}
->>>>>>> 3e978d94bd540b321e23aae828bae26654f88ae8
