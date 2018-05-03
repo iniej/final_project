@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ValidationError
 
+# Create a form for user information input.
 class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
@@ -62,7 +63,7 @@ class RegistrationForm(UserCreationForm):
         return user
 
 class WatchListForm(forms.Form):
-    search_movie = forms.CharField(label = 'Search movie', max_length = 200)
+    search_movie = forms.CharField(label = 'Search for a movie', max_length = 200)
 
 class WatchedListForm(forms.Form):
     search_movie = forms.CharField(label = 'Search movie', max_length = 200)

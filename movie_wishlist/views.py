@@ -6,9 +6,6 @@ from movie_wishlist import movie_data
 from .models import WatchList
 # Create your views here.
 
-
-
-# Create your views here.
 def homepage(request):
     return render(request, 'movie_wishlist/homepage.html')
 
@@ -17,41 +14,28 @@ def popularMovies(request):
     search_movie = request.GET.get('search_movie')
     return render(request, 'movie_wishlist/popular_movies.html', {'form': form})
 
-# def login(request):
-#     return render(request, 'movie_management_app/login.html')
-#
-# def logout(request):
-#     return redirect(request, 'movie_management_app/homepage.html')
 
 def my_profile(request):
-    return render(request, 'movie_list/my_profile.html')
+    return render(request, 'movie_wishlist/my_profile.html')
 
-# def register(request):
-#     return render(request, 'movie_management_app/register.html')
 
 def user(request):
     return render(request, 'movie_wishlist/user.html')
 
 def watch_list(request):
+    watchlist = WatchList.objects.all()
     form = WatchListForm()
-    wishlist = WatchList.objects.all()
     search_movie = request.GET.get('search_movie')
-    return render(request, 'movie_wishlist/watchlist.html', {'form' : form, 'wishlist': wishlist})
+    args = {'form' : form, 'watchlist': watchlist}
+    return render(request, 'movie_wishlist/watchlist.html', args)
+    # return render(request, 'movie_wishlist/watchlist.html', {'form' : form, 'wishlist': wishlist})
 
 def movie_list(request):
-    # apikey = '6d42cd22'
-    # movie= {}
-    # if 'search_movie' in request.GET:
-    #     title = request.GET.get('search_movie')
-    #     print(title)
-    #     url = 'http://www.omdbapi.com/?apikey='+apikey+'&'+'t='+title
-    #     response = requests.get(url)
-    #     movie = response.json()['Title']
-    # else:
 
-
+    # title = request.GET.get('search_movie')
+    # movie = movie_data.movie_api(title)
     title = request.GET.get('search_movie')
-    movie = movie_data.movie_api(title)
+    movie = movie_data.get_movie_info(title)
 
     return render(request, 'movie_wishlist/movie.html',{'movie': movie})
 
@@ -59,6 +43,8 @@ def watched_list(request):
     form = WatchedListForm()
     search_movie = request.GET.get('search_movie')
     return render(request, 'movie_wishlist/watchedlist.html', {'form': form})
+
+
 def register(request):
 
     if request.method == 'POST':
@@ -79,13 +65,13 @@ def register(request):
         return render(request, 'registration/register.html', { 'form' : form } )
 
 def add_to_watchlist(request):
-    name = request.POST.get("Title")
+    title = request.POST.get("Title")
     year = request.POST.get('Year')
     actor = request.POST.get('Actors')
     director = request.POST.get('Director')
 
-    new_movie = WatchList(title = name, actor = actor, director = director, year = year)
+    new_movie = WatchList(name = title, actor = actor, director = director, year = year)
+    if not 'Cancel' in request.POST:
+        new_movie.save()
 
-
-    new_movie.save()
     return render(request, 'movie_wishlist/user.html')

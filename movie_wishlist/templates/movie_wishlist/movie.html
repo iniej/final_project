@@ -4,14 +4,13 @@
 
 
 {% if movie %}
-  <p>name = {{movie.Title}}</title>
-  <p>year = {{movie.Year}}</year>
-  <p>actor = {{movie.Actors}}</actor>
-  <p>director = {{movie.Director}}</director>
+  <p><strong>Name of movie:</strong> {{movie.Title}}<p>
+  <p><strong>Year of released:</strong> {{movie.Year}}<p>
+  <p><strong>Actors:</strong> {{movie.Actors}}</p>
+  <p><strong>Director:</strong> {{movie.Director}}</p>
 {% else %}
   <p>No movie with that name found</p>
 {% endif %}
-
 
 
 <form action = "{% url 'add_to_watchlist' %}" method = "POST">{% csrf_token %}
@@ -19,8 +18,8 @@
   <input type = 'hidden' id ="Year" name= "Year" value = {{movie.Year}} />
   <input type = 'hidden' id = 'Director' name = 'Director' value = {{movie.Director}} />
   <input type = 'hidden' id ="Actors" name= "Actors" value = {{movie.Actors}}/>
-  <input type = 'submit' value = 'ADD' />
-  <input type = 'submit' name = 'cancel' value = 'cancel' />
+  <input type = 'submit' value = 'Add to wishlist?'/>
+  <input type = 'submit' name = 'Cancel' value = 'Cancel' />
 </form>
 
 
