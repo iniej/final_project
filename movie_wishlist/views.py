@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
-from .forms import RegistrationForm, WatchedListForm, WatchListForm, PopularMoviesForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import  WatchedListForm, WatchListForm, PopularMoviesForm, RegistrationForm
 from django.contrib.auth import authenticate, login, logout
 import requests
 from movie_wishlist import movie_data
-from .models import WatchList
+from .models import WatchList, WatchedList
+from django.http.response import HttpResponseForbidden
 # Create your views here.
 
 def homepage(request):
@@ -28,21 +29,17 @@ def watch_list(request):
     search_movie = request.GET.get('search_movie')
     args = {'form' : form, 'watchlist': watchlist}
     return render(request, 'movie_wishlist/watchlist.html', args)
-    # return render(request, 'movie_wishlist/watchlist.html', {'form' : form, 'wishlist': wishlist})
 
 def movie_list(request):
-
     title = request.GET.get('search_movie')
     movie = movie_data.movie_api(title)
-    # title = request.GET.get('search_movie')
-    # movie = movie_data.movie_api(title)
-
     return render(request, 'movie_wishlist/movie.html',{'movie': movie})
 
 def watched_list(request):
+    watched_movie = WatchList.objects.all()
     form = WatchedListForm()
     search_movie = request.GET.get('search_movie')
-    return render(request, 'movie_wishlist/watchedlist.html', {'form': form})
+    return render(request, 'movie_wishlist/watchedlist.html', {'form': form, 'watched_movie' : watched_movie})
 
 
 def register(request):
@@ -71,7 +68,30 @@ def add_to_watchlist(request):
     director = request.POST.get('Director')
 
     new_movie = WatchList(name = title, actor = actor, director = director, year = year)
-    if not 'Cancel' in request.POST:
+    movie_name = WatchList.objects.filter(name__iexact = title).all()
+    # if not 'Cancel' in request.POST:
+    if movie_name:
+        message = 'That movie already exist in your database'
+        return render(request, 'movie_wishlist/watchlist.html', {'message': message})
+    else:
         new_movie.save()
 
     return render(request, 'movie_wishlist/user.html')
+
+
+def add_to_watchedlist(request):
+    title = request.POST.get("Name")
+    year = request.POST.get('Year')
+    director = request.POST.get('Director')
+    actor = request.POST.get('Actors')
+    watched_movie = WatchedList(name = title, actor= actor, director = director, year = year)
+    if not 'Cancel' in request.POST:
+        watched_movie.save()
+        movie = WatchList.objects.filter(name__iexact = title)
+        movie.delete()
+    return render(request, 'movie_wishlist/user.html')
+
+
+def movie_detail(request, pk):
+    movie_detail = get_object_or_404(WatchList, pk = pk)
+    return render(request, 'movie_wishlist/movie_detail.html', {'movie_detail': movie_detail})

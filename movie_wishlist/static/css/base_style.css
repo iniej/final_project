@@ -1,29 +1,10 @@
-<<<<<<< HEAD
-ody {
-  font-family: monospace;
-}
-
-#welcome_msg, #login {
-=======
 body {
   font-family: monospace;
 }
 
-#welcome_user_msg, #login_or_sign_up {
->>>>>>> 3e978d94bd540b321e23aae828bae26654f88ae8
+#welcome_msg, #login {
   position: absolute;
   right: 0px;
   padding-right: 10px;
+  
 }
-<<<<<<< HEAD
-=======
-
-#login_form.tr, #registration_form.tr {
-  padding-top: 2px;
-  padding-bottom: 2px;
-}
-
-#login_form.th, #registration_form.th {
-  text-align: right;
-}
->>>>>>> 3e978d94bd540b321e23aae828bae26654f88ae8

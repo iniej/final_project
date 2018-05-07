@@ -13,12 +13,6 @@ class RegistrationForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
 
-class UserRegistrationForm(UserCreationForm):
-
-    class Meta:
-        model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
-
 
     def clean_username(self):
 
@@ -75,10 +69,10 @@ class UserRegistrationForm(UserCreationForm):
         return user
 
 class WatchListForm(forms.Form):
-    search_movie = forms.CharField(label = 'Search for a movie', max_length = 200)
+    search_movie = forms.CharField(label = 'Search for a movie', max_length = 400)
 
 class WatchedListForm(forms.Form):
-    search_movie = forms.CharField(label = 'Search movie', max_length = 200)
+    search_movie = forms.CharField(label = 'Search movie', max_length = 400)
 
 class PopularMoviesForm(forms.Form):
-    search_movie = forms.CharField(label = 'Search popular movie',max_length = 200)
+    search_movie = forms.CharField(label = 'Search popular movie',max_length = 400)

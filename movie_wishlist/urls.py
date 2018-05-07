@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'^user/movies/watchlist/$', views.watch_list, name = 'watch_list'),
     url(r'^user/movies/watchedlist/$', views.watched_list, name = 'watched_list'),
     url(r'^user/movies/movielist/$', views.movie_list, name = 'movie_list'),
-    url(r'^user/movies/movie_to_watch/$', views.add_to_watchlist, name = 'add_to_watchlist'),
+    url(r'^user/movies/wishlist/$', views.add_to_watchlist, name = 'add_to_watchlist'),
+    url(r'^user/movies/watchedmovie/$', views.add_to_watchedlist, name = 'add_to_watchedlist'),
+    url(r'^user/movies/moviedetail/(?P<pk>\d+)/$', views.movie_detail, name = 'movie_detail'),
 ]
