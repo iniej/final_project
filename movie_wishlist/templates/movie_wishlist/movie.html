@@ -12,7 +12,7 @@
   <p>No movie with that name found</p>
 {% endif %}
 
-
+<div>
 <form action = "{% url 'add_to_watchlist' %}" method = "POST">{% csrf_token %}
   <input type = 'hidden' id = 'Title' name = 'Title' value = {{movie.Title}} />
   <input type = 'hidden' id ="Year" name= "Year" value = {{movie.Year}} />
@@ -21,7 +21,9 @@
   <input type = 'submit' value = 'Add to wishlist?'/>
   <input type = 'submit' name = 'Cancel' value = 'Cancel' />
 </form>
+</div>
 
+<iframe style= "float:right-top;" width="560" height="315" src= "http://www.youtube.com/embed/movie.Title" frameborder= "0" allow= "autoplay; encripted-media"allowfullscreen></iframe>
 
 <p>Go back to user main page? <a href = "{% url 'user' %}">click here</a></p>
 

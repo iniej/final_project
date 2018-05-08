@@ -2,11 +2,12 @@ import requests
 import os
 
 
-apikey = '6d42cd22'
+
 # Make an api call to get the movie
 def movie_api(name):
-
+    apikey = os.environ['MOVIE_KEY']
     url = 'http://www.omdbapi.com/?apikey='+apikey+'&'+'t='+name
+
     movie = {}
     response = requests.get(url)
     movie1 = response.json()

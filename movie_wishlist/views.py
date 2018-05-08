@@ -36,7 +36,7 @@ def movie_list(request):
     return render(request, 'movie_wishlist/movie.html',{'movie': movie})
 
 def watched_list(request):
-    watched_movie = WatchList.objects.all()
+    watched_movie = WatchedList.objects.all()
     form = WatchedListForm()
     search_movie = request.GET.get('search_movie')
     return render(request, 'movie_wishlist/watchedlist.html', {'form': form, 'watched_movie' : watched_movie})
