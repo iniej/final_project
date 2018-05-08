@@ -20,7 +20,7 @@ class HomePageTest(LiveServerTestCase):
 
     def test_home_page(self):
         browser = webdriver.Chrome()
-        
+
         browser.get('http://127.0.0.1:8000')
         # assert 'Welcome to the movie management app' in browser.page_source
         assert 'MOVIE MANAGER WEB APP' in browser.page_source
@@ -39,7 +39,7 @@ class TestEmptyViews(TestCase):
 
 class RegistrationFormTests(TestCase):
 
-    # Test missing fields
+    # Test complete fields
 
     def test_register_user_with_valid_data_is_valid(self):
         form_data = { 'username' : 'bob' , 'email' : 'bob@bob.com', 'first_name' : 'bob', 'last_name' : 'whatever', 'password1' : 'qwertyuiop', 'password2' : 'qwertyuiop' }
@@ -58,6 +58,7 @@ class RegistrationFormTests(TestCase):
 
 
     def test_register_user_with_password_mismatch_fails(self):
+        # Test for valid password
         form_data = { 'username' : 'another_bob' , 'email' : 'bob@bob.com', 'first_name' : 'bob', 'last_name' : 'whatever', 'password1' : 'qwertyuiop', 'password2' : 'qwertyuiop2' }
         form = RegistrationForm(form_data)
         self.assertFalse(form.is_valid())

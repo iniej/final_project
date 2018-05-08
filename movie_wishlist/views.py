@@ -5,11 +5,11 @@ import requests
 from movie_wishlist import movie_data
 from .models import WatchList, WatchedList
 from django.http.response import HttpResponseForbidden
-# Create your views here.
 
+# homepage view
 def homepage(request):
     return render(request, 'movie_wishlist/homepage.html')
-
+#
 def popularMovies(request):
     form = PopularMoviesForm()
     search_movie = request.GET.get('search_movie')
@@ -69,12 +69,13 @@ def add_to_watchlist(request):
 
     new_movie = WatchList(name = title, actor = actor, director = director, year = year)
     movie_name = WatchList.objects.filter(name__iexact = title).all()
-    # if not 'Cancel' in request.POST:
+    
     if movie_name:
         message = 'That movie already exist in your database'
         return render(request, 'movie_wishlist/watchlist.html', {'message': message})
     else:
-        new_movie.save()
+        if not 'Cancel' in request.POST:
+            new_movie.save()
 
     return render(request, 'movie_wishlist/user.html')
 
