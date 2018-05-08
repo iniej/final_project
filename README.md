@@ -20,3 +20,8 @@ the application makes an api call to OMDB and get the movie and put it into a wa
 Site at
 
 127.0.0.1:8000
+
+Need a free OMDB API KEY 
+
+* Movie Trailer api call from Youtube is not working yet.
+* Rating functionality is not working yest
