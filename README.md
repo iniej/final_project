@@ -24,4 +24,4 @@ Site at
 Need a free OMDB API KEY 
 
 * Movie Trailer api call from Youtube is not working yet.
-* Rating functionality is not working yest
+* Rating functionality is not working yet
